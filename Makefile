@@ -8,12 +8,12 @@ CFLAGS += -D_BSD_SOURCE -D_POSIX_SOURCE -D_POSIX_C_SOURCE=200112L -D_DEFAULT_SOU
 
 all:
 	$(MAKE) -C mbedtls lib
-	$(MAKE) hactool$(EXEEXT)
+	$(MAKE) beetool$(EXEEXT)
 
 .c.o:
 	$(CC) $(INCLUDE) -c $(CFLAGS) -o $@ $<
 
-hactool$(EXEEXT): save.o sha.o aes.o extkeys.o rsa.o npdm.o bktr.o kip.o packages.o pki.o pfs0.o hfs0.o nca0_romfs.o romfs.o utils.o nax0.o nso.o lz4.o nca.o xci.o main.o filepath.o ConvertUTF.o cJSON.o zstd-zbic/zstd.o
+beetool$(EXEEXT): save.o sha.o aes.o extkeys.o rsa.o npdm.o bktr.o kip.o packages.o pki.o pfs0.o hfs0.o nca0_romfs.o romfs.o utils.o nax0.o nso.o lz4.o nca.o xci.o main.o filepath.o ConvertUTF.o cJSON.o zstd-zbic/zstd.o
 	$(CC) -o $@ $^ -L $(LIBDIR) $(LDFLAGS)
 
 aes.o: aes.h types.h
@@ -67,17 +67,17 @@ cJSON.o: cJSON.h
 zstd-zbic/zstd.o: zstd-zbic/zstd.h zstd-zbic/zstd_errors.h
 
 clean:
-	rm -f *.o zstd-zbic/*.o hactool hactool.exe
+	rm -f *.o zstd-zbic/*.o beetool beetool.exe
 
 clean_full:
-	rm -f *.o zstd-zbic/*.o hactool hactool.exe
+	rm -f *.o zstd-zbic/*.o beetool beetool.exe
 	$(MAKE) -C mbedtls clean
 
 dist: clean_full
 	$(eval HACTOOLVER = $(shell grep '\bHACTOOL_VERSION\b' version.h \
 		| cut -d' ' -f3 \
 		| sed -e 's/"//g'))
-	mkdir hactool-$(HACTOOLVER)
-	cp -R *.c *.h config.mk.template Makefile README.md LICENSE mbedtls hactool-$(HACTOOLVER)
-	tar czf hactool-$(HACTOOLVER).tar.gz hactool-$(HACTOOLVER)
-	rm -r hactool-$(HACTOOLVER)
+	mkdir beetool-$(HACTOOLVER)
+	cp -R *.c *.h config.mk.template Makefile README.md LICENSE mbedtls hacbeetooltool-$(HACTOOLVER)
+	tar czf beetool-$(HACTOOLVER).tar.gz beetool-$(HACTOOLVER)
+	rm -r beetool-$(HACTOOLVER)

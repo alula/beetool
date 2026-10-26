@@ -16,12 +16,12 @@
 #include "nso.h"
 #include "save.h"
 
-static const char *prog_name = "hactool";
+static const char *prog_name = "beetool";
 
 /* Print usage. Taken largely from ctrtool. */
 static void usage(void) {
     fprintf(stderr,
-        "hactool (c) SciresM.\n"
+        "beetool (c) SciresM.\n"
         "Built: %s %s\n"
         "\n"
         "Usage: %s [options...] <file>\n"
@@ -120,7 +120,7 @@ int main(int argc, char **argv) {
     char input_name[0x200];
     filepath_t keypath;
 
-    prog_name = (argc < 1) ? "hactool" : argv[0];
+    prog_name = (argc < 1) ? "beetool" : argv[0];
 
     nca_init(&nca_ctx);
     memset(&tool_ctx, 0, sizeof(tool_ctx));
